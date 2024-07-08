@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:04:04 by jbremser          #+#    #+#             */
-/*   Updated: 2024/06/24 17:16:51 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:34:29 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,71 +14,105 @@
 
 int init_data(t_data *data, char **argv)
 {
-	data->rsvps = anti_plato(argv[1]);
-	data->hemlock_time = anti_plato(argv[2]);
-	data->dinner_bell = anti_plato(argv[3]);
-	data->drunken_stupor = anti_plato(argv[4]);
+	data->rsvps = ft_atoi(argv[1]);
+	data->hemlock_time = ft_atoi(argv[2]);
+	data->dinner_bell = ft_atoi(argv[3]);
+	data->drunken_stupor = ft_atoi(argv[4]);
 	if (argv[5])
-		data->feasts = anti_plato(argv[5]);
+		data->feasts = ft_atoi(argv[5]);
 	else
 		data->feasts = -1;
 	data->symposium_start = kronosophize();
 	ft_usleep(100);
 	data->current_time = update_krono(data->symposium_start);
-	if (init_mutexes(data) != 0)
-	{
-		destroy_data_mutexes(data);
-		printf("Error inititalizing data mutexes\n");
-		return (0);
-	}
-	return (1);
+	return (0);
 }
 
-int init_plato(t_plato *plato, t_data data)
+int init_plato(t_plato *plato, t_data *data)
 {
 	int i;
 
 	i = 0;
 
-	while (i < data.rsvps)
+	while (i < data->rsvps)
 	{
 		memset(&plato[i], 0, sizeof(t_plato));
-		plato[i].id = i + 1;
-		plato[i].data = &data;
-		i++;
-	}
-	return (1);
-}
-
-int destroy_data_mutexes(t_data *data)
-{
-	int		i;
-	t_data	tmp;
-
-	i = 0;
-	tmp = *data;
-	while (i < tmp.num_of_philos)
-	{
-		pthread_mutex_destroy(&tmp.forks[i]);
-		i++;
-	}
-	free(data->forks);
-	return(1);
-}
-
-int init_mutexes(t_data *data)
-{
-	int i;
-
-	i = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * (data->rsvps));
-	if (!data->forks)
-		return (1);
-	while (i < data.rsvps)
-	{
-		if (pthread_mutex_int(&data.forks[i], NULL) != 0)
+		if (init_mutexes(plato, data->rsvps) == 1)
+		{
+			destroy_fork_mutexes(plato);
+			printf("Error inititalizing data mutexes\n");
 			return (1);
+		}
+		plato[i].id = i + 1;
+		plato[i].data = data;
+		if (data->rsvps == 1)
+			plato[i].l_fork  = NULL;
+		if (i < data->rsvps)	
+			plato[i].l_fork = plato[i + 1].r_fork;
+		else if (i == data->rsvps)
+			plato[i].l_fork = plato[0].r_fork;
+		if (pthread_mutex_init(&plato[i].meal_lock, NULL) != 0)
+		{
+			destroy_fork_mutexes(plato);
+			printf("Error initializing meal_lock mutex \n");
+			return (1);
+		}
 		i++;
 	}
 	return (0);
 }
+
+int check_status(t_plato *plato, t_data *data)
+{
+	int i;
+
+	i = 0;
+	
+	while (i <= data->rsvps)
+	{
+		printf("Inside status check\n");
+		if (plato->id == i)
+		{
+			if (plato->hemlock == true)
+			{
+				printf("Philo %d has died at %zu\n", plato->id, data->current_time);
+				return (1);
+			}
+			if (data->feasts > 0)
+			{	if (plato->meals_consumed > data->feasts)
+				{
+					printf("Philo %d is full\n", plato->id); 
+					return (2);
+				}
+			}
+		}
+	i++;
+	}
+	return (0);
+}
+
+int symp_routine(t_plato *plato, t_data *data)
+{
+	if (check_status(plato, data) == 1)
+		return (1);
+//	if (plato ->id % 2 == 1)
+
+//		pthread_mutex_lock(plato->
+				//check flags/death flags
+				//lock down the forks
+				//usleep for argv amount of time to eat
+				//write time of day
+				//write "Philo 1 eats"
+				//unlock forks
+				//set HUNGER timer
+				//usleep for argv amount to sleep
+				//write time of day
+				//write philo 1 sleeps
+	return (0);
+}
+
+//int init_threads(t_plato *plato, t_data *data)
+//{
+//	return (0);	
+//}
+
