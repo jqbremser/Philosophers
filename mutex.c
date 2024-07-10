@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:41:55 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/03 17:28:40 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:51:39 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	destroy_philo_mutexes(t_plato *plato)
 	int i;
 
 	i = 0;
-	while (i < plato->data->rsvps)
+	while (i < plato->alcibiades->rsvps)
 	{
 		pthread_mutex_destroy(&plato[i].meal_lock);
 		i++;
@@ -52,7 +52,7 @@ int destroy_fork_mutexes(t_plato* plato)
 	return(0);
 }
 
-void cleanup(t_plato *plato, t_data *data)
+void cleanup(t_plato *plato, t_moniter *data)
 {
 	destroy_fork_mutexes(plato);
 	destroy_philo_mutexes(plato);
@@ -60,7 +60,7 @@ void cleanup(t_plato *plato, t_data *data)
 	free(data);
 }
 
-int clean_data(t_data *data)
+int clean_data(t_moniter *data)
 {
 	free(data);
 	printf("Data cleaned\n");

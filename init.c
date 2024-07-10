@@ -6,20 +6,20 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:04:04 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/08 13:34:29 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:37:32 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "symposium.h"
 
-int init_data(t_data *data, char **argv)
+int init_data(t_moniter *data, char **argv)
 {
-	data->rsvps = ft_atoi(argv[1]);
-	data->hemlock_time = ft_atoi(argv[2]);
-	data->dinner_bell = ft_atoi(argv[3]);
-	data->drunken_stupor = ft_atoi(argv[4]);
+	data->rsvps = ft_atol(argv[1]);
+	data->hemlock_time = ft_atol(argv[2]);
+	data->dinner_bell = ft_atol(argv[3]);
+	data->drunken_stupor = ft_atol(argv[4]);
 	if (argv[5])
-		data->feasts = ft_atoi(argv[5]);
+		data->feasts = ft_atol(argv[5]);
 	else
 		data->feasts = -1;
 	data->symposium_start = kronosophize();
@@ -28,7 +28,25 @@ int init_data(t_data *data, char **argv)
 	return (0);
 }
 
-int init_plato(t_plato *plato, t_data *data)
+int init_moniter(t_moniter *alcibiades, char **argv)
+{
+	alcibiades->plato = NULL;
+	alcibiades->full_philos = 0;
+	alcibiades->rsvps = ft_atol(argv[1]);
+	alcibiades->hemlock_time = ft_atol(argv[2]);
+	alcibiades->dinner_bell = ft_atol(argv[3]);
+	alcibiades->drunken_stupor = ft_atol(argv[4]);
+	alcibiades->plato = malloc(sizeof(t_plato) * alcibiades->rsvps);
+	if (alcibiades->plato == NULL)
+		return (EXIT_MALLOC_FAIL);
+	alcibiades->symposium_start = kronosophize();
+	alcibiades->current_time = update_krono(alcibiades->symposium_start);
+	if (pthread_mutex_init(&alcibiades->lock_print, NULL) != 0)
+		return(EXIT_MUTEX_INIT_ERROR);
+	return (0);
+}
+
+int init_plato(t_plato *plato, t_moniter *data)
 {
 	int i;
 
@@ -44,7 +62,7 @@ int init_plato(t_plato *plato, t_data *data)
 			return (1);
 		}
 		plato[i].id = i + 1;
-		plato[i].data = data;
+		plato[i].alcibiades = data;
 		if (data->rsvps == 1)
 			plato[i].l_fork  = NULL;
 		if (i < data->rsvps)	
@@ -62,7 +80,7 @@ int init_plato(t_plato *plato, t_data *data)
 	return (0);
 }
 
-int check_status(t_plato *plato, t_data *data)
+int check_status(t_plato *plato, t_moniter *data)
 {
 	int i;
 
@@ -70,7 +88,6 @@ int check_status(t_plato *plato, t_data *data)
 	
 	while (i <= data->rsvps)
 	{
-		printf("Inside status check\n");
 		if (plato->id == i)
 		{
 			if (plato->hemlock == true)
@@ -91,7 +108,7 @@ int check_status(t_plato *plato, t_data *data)
 	return (0);
 }
 
-int symp_routine(t_plato *plato, t_data *data)
+int symp_routine(t_plato *plato, t_moniter *data)
 {
 	if (check_status(plato, data) == 1)
 		return (1);
@@ -111,7 +128,7 @@ int symp_routine(t_plato *plato, t_data *data)
 	return (0);
 }
 
-//int init_threads(t_plato *plato, t_data *data)
+//int init_threads(t_plato *plato, t_moniter *data)
 //{
 //	return (0);	
 //}
