@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/10 18:28:17 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:31:31 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,32 @@ typedef enum s_error_code
 
 typedef struct s_plato
 {
-	pthread_mutex_t *r_fork;
-	pthread_mutex_t *l_fork;
-	pthread_mutex_t meal_lock;
-	struct	s_moniter		*alcibiades;
-	int				id;
-	int				meals_consumed;
-	size_t			meal_time;
-	bool			full;
-	bool			hemlock;
+	int					id;
+	struct	s_moniter	*alcibiades;
+	int					hemlock_time;
+	int					dinner_bell;
+	int					drunken_stupor;
+	int					feasts;
+	size_t				symposium_start;
+	size_t				current_time;
+	pthread_t			thread;
+	int					meals_consumed;
+	size_t				meal_time;
+	bool				full;
+	bool				hemlock_taken;
+	pthread_mutex_t		*r_fork;
+	pthread_mutex_t		*l_fork;
+	pthread_mutex_t		meal_lock;
+	pthread_mutex_t		lock_print;
 }	t_plato;
 
 typedef struct s_moniter
 {	
-	int rsvps;
-	int hemlock_time;
-	int	dinner_bell;
-	int	drunken_stupor;
-	int feasts;
-	int full_philos;
-	t_plato	*plato;
-	size_t symposium_start;
-	size_t current_time;
-	pthread_mutex_t lock_print;
+	int				rsvps;
+	int				full_philos;
+	bool			hemlock_taken;
+	pthread_mutex_t	hemlock;
+	t_plato			*plato;
 }	t_moniter;
 
 /* ************************************************************************** */
@@ -63,14 +66,14 @@ typedef struct s_moniter
 /* ************************************************************************** */
 long ft_atol(char *str);
 void print_structs(t_moniter *data, t_plato *plato);
-int check_args(char **argv, t_moniter *alcibiades);
+int check_args(char **argv);
 
 
 /* ************************************************************************** */
 /*									init									  */
 /* ************************************************************************** */
-int init_moniter(t_moniter *data, char **argv);
-int init_plato(t_plato *plato, t_moniter *data);
+int init_moniter(t_moniter *alcibiades, char **argv);
+int init_plato(t_plato *plato, char **argv, t_moniter *alcibiades);
 //int init_threads(t_plato *plato, t_moniter *data);
 int check_status(t_plato *plato, t_moniter *data);
 int symp_routine(t_plato *plato, t_moniter *data);
