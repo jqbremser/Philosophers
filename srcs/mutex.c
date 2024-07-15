@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:41:55 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 16:23:23 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:19:39 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <pthread.h>
 
 
-int init_mutexes(t_plato plato)
+int init_mutexes(t_plato *plato)
 {
-	if (pthread_mutex_init(&plato.r_fork, NULL) != 0)
+	if (pthread_mutex_init(&plato->r_fork, NULL) != 0)
 			return (1);
-	if (pthread_mutex_init(&plato.meal_lock, NULL) != 0)
+	if (pthread_mutex_init(&plato->meal_lock, NULL) != 0)
 			return (1);
 	return (0);
 }

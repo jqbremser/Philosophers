@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:04:04 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 18:04:50 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:21:10 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void fill_plato(t_plato *plato, char **argv, t_moniter *alcibiades)
 {
 		memset(plato, 0, sizeof(t_plato));
 		plato->alcibiades = alcibiades;
+		plato->hemlock_taken = false;
 		plato->hemlock_time = ft_atol(argv[2]);
 		plato->dinner_bell = ft_atol(argv[3]);
 		plato->drunken_stupor = ft_atol(argv[4]);
@@ -35,7 +36,7 @@ int init_moniter(t_moniter *alcibiades, char **argv)
 	alcibiades->full_philos = 0;
 	alcibiades->rsvps = ft_atol(argv[1]);
 	alcibiades->hemlock_taken = false;
-	alcibiades->plato = malloc(sizeof(t_plato) * alcibiades->rsvps);
+	alcibiades->plato = malloc(sizeof(t_plato *) * alcibiades->rsvps);
 	if (alcibiades->plato == NULL)
 		return (EXIT_MALLOC_FAIL);
 	if (pthread_mutex_init(&alcibiades->hemlock, NULL) != 0)
@@ -52,31 +53,31 @@ int init_plato(t_moniter *alcibiades, char **argv)
 	i = 0;
 	while (i < alcibiades->rsvps)
 	{
-		fill_plato(&alcibiades->plato[i], argv,  alcibiades);
-		alcibiades->plato[i].id = i + 1;
+		alcibiades->plato[i] = malloc(sizeof(t_plato));
+		fill_plato(alcibiades->plato[i], argv,  alcibiades);
+		alcibiades->plato[i]->id = i + 1;
+		alcibiades->plato[i]->l_fork  = NULL;
 		if (init_mutexes(alcibiades->plato[i]) != 0)
 			return (EXIT_MUTEX_INIT_ERROR);
-		if (alcibiades->rsvps == 1)
-			alcibiades->plato[i].l_fork  = NULL;
 		if (i < alcibiades->rsvps)	
-			alcibiades->plato[i].l_fork = &alcibiades->plato[i + 1].r_fork;
+			alcibiades->plato[i]->l_fork = &alcibiades->plato[i + 1]->r_fork;
 		else if (i == alcibiades->rsvps)
-			alcibiades->plato[i].l_fork = &alcibiades->plato[0].r_fork;
-		if (pthread_create(&alcibiades->plato[i].thread, NULL, \
+			alcibiades->plato[i]->l_fork = &alcibiades->plato[0]->r_fork;
+		if (pthread_create(&alcibiades->plato[i]->thread, NULL, \
 			&symp_routine, &alcibiades) != 0)
 			return (EXIT_THREADS_ERROR);
-		print_structs(&alcibiades->plato[i]);
+		print_structs(alcibiades->plato[i]);
 		i++;
 	}
 	return (0);
 }
-
+/*
 static int check_status(t_plato *plato, t_moniter *data)
 {
 	int i;
 
 	i = 0;
-	
+// this is all nonsense as of this point	
 	while (i <= data->rsvps)
 	{
 		if (plato->id == i)
@@ -98,24 +99,4 @@ static int check_status(t_plato *plato, t_moniter *data)
 	}
 	return (0);
 }
-
-void *symp_routine(void *ptr)
-{
-	if (check_status(plato, data) == 1)
-		return (1);
-//	if (plato ->id % 2 == 1)
-
-//		pthread_mutex_lock(plato->
-				//check flags/death flags
-				//lock down the forks
-				//usleep for argv amount of time to eat
-				//write time of day
-				//write "Philo 1 eats"
-				//unlock forks
-				//set HUNGER timer
-				//usleep for argv amount to sleep
-				//write time of day
-				//write philo 1 sleeps
-	return (0);
-}
-
+*/

@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 18:04:45 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:18:55 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <pthread.h>
 # include <limits.h>
 # define FT_LONG_MAX 9223372036854775807L
+
+# define FORK	"has taken a fork"
+# define EATING		"is eating"
+# define SLEEPING	"is sleeping"
+# define THINKING	"is thinking"
+# define DIED		"has taken hemlock"
 
 typedef enum s_error_code
 {
@@ -59,7 +65,7 @@ typedef struct s_moniter
 	bool			hemlock_taken;
 	pthread_mutex_t	hemlock;
 	pthread_mutex_t	print_lock;
-	t_plato			*plato;
+	t_plato			**plato;
 }	t_moniter;
 
 /* ************************************************************************** */
@@ -75,7 +81,6 @@ int check_args(char **argv);
 /* ************************************************************************** */
 int init_moniter(t_moniter *alcibiades, char **argv);
 int init_plato(t_moniter *alcibiades, char **argv);
-void *symp_routine(void *ptr);
 
 
 /* ************************************************************************** */
@@ -90,7 +95,18 @@ void ft_usleep(size_t mili);
 /* ************************************************************************** */
 int destroy_fork_mutexes(t_plato* plato);
 int clean_data(t_moniter *data);
-int	init_mutexes(t_plato plato);
+int	init_mutexes(t_plato *plato);
 void cleanup(t_plato *plato, t_moniter *data);
+
+/* ************************************************************************** */
+/*									routine									  */
+/* ************************************************************************** */
+void *symp_routine(void *ptr);
+
+/* ************************************************************************** */
+/*									locks									  */
+/* ************************************************************************** */
+void print_message(const char *message, t_plato *plato, int dead);
+int is_alive(t_plato *plato);
 
 #endif
