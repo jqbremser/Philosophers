@@ -6,69 +6,72 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:04:04 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/12 15:23:32 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:04:50 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../symposium.h"
+#include <pthread.h>
+
+static void fill_plato(t_plato *plato, char **argv, t_moniter *alcibiades)
+{
+		memset(plato, 0, sizeof(t_plato));
+		plato->alcibiades = alcibiades;
+		plato->hemlock_time = ft_atol(argv[2]);
+		plato->dinner_bell = ft_atol(argv[3]);
+		plato->drunken_stupor = ft_atol(argv[4]);
+		if (argv[5])
+			plato->feasts = ft_atol(argv[5]);
+		else if (!argv[5])
+			plato->feasts = -1;
+		plato->symposium_start = kronosophize();
+		plato->current_time = update_krono(plato->symposium_start);
+
+}
 
 int init_moniter(t_moniter *alcibiades, char **argv)
 {
 	alcibiades->plato = NULL;
 	alcibiades->full_philos = 0;
 	alcibiades->rsvps = ft_atol(argv[1]);
+	alcibiades->hemlock_taken = false;
 	alcibiades->plato = malloc(sizeof(t_plato) * alcibiades->rsvps);
 	if (alcibiades->plato == NULL)
 		return (EXIT_MALLOC_FAIL);
 	if (pthread_mutex_init(&alcibiades->hemlock, NULL) != 0)
-		return(EXIT_MUTEX_INIT_ERROR);
+		return (EXIT_MUTEX_INIT_ERROR);
+	if (pthread_mutex_init(&alcibiades->print_lock, NULL) != 0)
+		return (EXIT_MUTEX_INIT_ERROR);
 	return (0);
 }
 
-int init_plato(t_plato *plato, char **argv, t_moniter *alcibiades)
+int init_plato(t_moniter *alcibiades, char **argv)
 {
 	int i;
 
 	i = 0;
-
 	while (i < alcibiades->rsvps)
 	{
-		memset(&plato[i], 0, sizeof(t_plato));
-		plato[i].id = i + 1;
-		plato[i].alcibiades = alcibiades;
-		plato[i].hemlock_time = ft_atol(argv[2]);
-		plato[i].dinner_bell = ft_atol(argv[3]);
-		plato[i].drunken_stupor = ft_atol(argv[4]);
-		if (argv[5])
-			plato[i].feasts = ft_atol(argv[5]);
-		else if (!argv[5])
-			plato[i].feasts = -1;
-		plato[i].symposium_start = kronosophize();
-		plato[i].current_time = update_krono(plato[i].symposium_start);
+		fill_plato(&alcibiades->plato[i], argv,  alcibiades);
+		alcibiades->plato[i].id = i + 1;
+		if (init_mutexes(alcibiades->plato[i]) != 0)
+			return (EXIT_MUTEX_INIT_ERROR);
 		if (alcibiades->rsvps == 1)
-			plato[i].l_fork  = NULL;
+			alcibiades->plato[i].l_fork  = NULL;
 		if (i < alcibiades->rsvps)	
-			plato[i].l_fork = plato[i + 1].r_fork;
+			alcibiades->plato[i].l_fork = &alcibiades->plato[i + 1].r_fork;
 		else if (i == alcibiades->rsvps)
-			plato[i].l_fork = plato[0].r_fork;
-//		if (init_mutexes(plato, data->rsvps) == 1)
-//		{
-//			destroy_fork_mutexes(plato);
-//			printf("Error inititalizing data mutexes\n");
-//			return (1);
-//		}
-//		if (pthread_mutex_init(&plato[i].meal_lock, NULL) != 0)
-//		{
-//			destroy_fork_mutexes(plato);
-//			printf("Error initializing meal_lock mutex \n");
-//			return (1);
-//		}
+			alcibiades->plato[i].l_fork = &alcibiades->plato[0].r_fork;
+		if (pthread_create(&alcibiades->plato[i].thread, NULL, \
+			&symp_routine, &alcibiades) != 0)
+			return (EXIT_THREADS_ERROR);
+		print_structs(&alcibiades->plato[i]);
 		i++;
 	}
 	return (0);
 }
-/*
-int check_status(t_plato *plato, t_moniter *data)
+
+static int check_status(t_plato *plato, t_moniter *data)
 {
 	int i;
 
@@ -96,7 +99,7 @@ int check_status(t_plato *plato, t_moniter *data)
 	return (0);
 }
 
-int symp_routine(t_plato *plato, t_moniter *data)
+void *symp_routine(void *ptr)
 {
 	if (check_status(plato, data) == 1)
 		return (1);
@@ -115,9 +118,4 @@ int symp_routine(t_plato *plato, t_moniter *data)
 				//write philo 1 sleeps
 	return (0);
 }
-*/
-//int init_threads(t_plato *plato, t_moniter *data)
-//{
-//	return (0);	
-//}
 

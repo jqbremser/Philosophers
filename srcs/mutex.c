@@ -6,40 +6,36 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:41:55 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/11 14:44:56 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:23:23 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../symposium.h"
+#include <pthread.h>
 
 
-static void	destroy_philo_mutexes(t_plato *plato)
+int init_mutexes(t_plato plato)
 {
-	int i;
-
-	i = 0;
-	while (i < plato->alcibiades->rsvps)
-	{
-		pthread_mutex_destroy(&plato[i].meal_lock);
-		i++;
-	}
-}
-int init_mutexes(t_plato *plato, int rsvps)
-{
-	int i;
-
-	i = 0;
-	plato->r_fork = malloc(sizeof(pthread_mutex_t) * (rsvps));
-	if (!plato->r_fork)
-		return (1);
-	while (i < rsvps)
-	{
-		if (pthread_mutex_init(plato->r_fork, NULL) != 0)
+	if (pthread_mutex_init(&plato.r_fork, NULL) != 0)
 			return (1);
-		i++;
-	}
+	if (pthread_mutex_init(&plato.meal_lock, NULL) != 0)
+			return (1);
 	return (0);
 }
+
+/*
+
+   static void	destroy_philo_mutexes(t_plato *plato)
+   {
+   int i;
+
+   i = 0;
+   while (i < plato->alcibiades->rsvps)
+   {
+   pthread_mutex_destroy(&plato[i].meal_lock);
+   i++;
+   }
+   }
 
 int destroy_fork_mutexes(t_plato* plato)
 {
@@ -65,4 +61,4 @@ int clean_data(t_moniter *data)
 	free(data);
 	printf("Data cleaned\n");
 	return(1);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:54:47 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/12 15:31:17 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:41:31 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,22 @@ int check_args(char **argv)
 			if (ft_atol(argv[5]) == 0)
 				return (EXIT_INVALID_ARGS);
 		}
-	i++;
+		i++;
 	}
 	return (0);
 }
 
-void print_structs(t_moniter *alcibiades, t_plato *plato)
+void print_structs(t_plato *plato)
 {
-	printf("rsvps:%d\n", alcibiades->rsvps);
+	printf("\nPHILO ID:%d\n", plato->id);
+	printf("rsvps:%d\n", plato->alcibiades->rsvps);
 	printf("Hemlock_time:%d\n", plato->hemlock_time);
 	printf("Dinner_bell:%d\n", plato->dinner_bell);
 	printf("Drunken_stupor:%d\n", plato->drunken_stupor);
 	printf("Feasts:%d\n", plato->feasts);
 	printf("Start of Symposium:%zu\n", plato->symposium_start);
 	printf("Current time: %zu\n", plato->current_time);
-	printf("Meals consumed: %d\n ", plato->meals_consumed);
+	printf("Meals consumed: %d\n\n", plato->meals_consumed);
 //	int i = 0;
 //	while (i < moniter.rsvps)
 //	{

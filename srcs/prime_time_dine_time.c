@@ -6,12 +6,11 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:39:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/12 15:31:59 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:49:19 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../symposium.h"
-
 
 int handle_error(int errno, t_moniter *alcibiades)
 {
@@ -38,8 +37,7 @@ int main(int argc, char **argv)
 		return (handle_error(EXIT_INVALID_ARGS, &alcibiades));
 	if (init_moniter(&alcibiades, argv) != 0)
 		return(handle_error(EXIT_INIT_ERROR, &alcibiades));
-	if (init_plato(alcibiades.plato, argv, &alcibiades) != 0)
+	if (init_plato(&alcibiades, argv) != 0)
 		return (handle_error(EXIT_INIT_ERROR, &alcibiades));
-	print_structs(&alcibiades, alcibiades.plato);
 	return (0);
 }
