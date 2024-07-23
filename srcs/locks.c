@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:49:32 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 19:53:50 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:00:40 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void print_message(const char *message, t_plato *plato, int dead)
 		return ;
 	time = update_krono(plato->symposium_start);
 	pthread_mutex_lock(&plato->alcibiades->print_lock);
-	printf("%u %d %s\n", time, plato->id, message);
+	printf("%u Philosopher %d %s\n", time, plato->id, message);
 	pthread_mutex_unlock(&plato->alcibiades->print_lock);
 }

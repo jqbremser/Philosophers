@@ -6,12 +6,11 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:04:04 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 20:21:10 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:50:02 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../symposium.h"
-#include <pthread.h>
 
 static void fill_plato(t_plato *plato, char **argv, t_moniter *alcibiades)
 {
@@ -27,7 +26,6 @@ static void fill_plato(t_plato *plato, char **argv, t_moniter *alcibiades)
 			plato->feasts = -1;
 		plato->symposium_start = kronosophize();
 		plato->current_time = update_krono(plato->symposium_start);
-
 }
 
 int init_moniter(t_moniter *alcibiades, char **argv)
@@ -36,7 +34,7 @@ int init_moniter(t_moniter *alcibiades, char **argv)
 	alcibiades->full_philos = 0;
 	alcibiades->rsvps = ft_atol(argv[1]);
 	alcibiades->hemlock_taken = false;
-	alcibiades->plato = malloc(sizeof(t_plato *) * alcibiades->rsvps);
+	alcibiades->plato = malloc(sizeof(t_plato) * alcibiades->rsvps);
 	if (alcibiades->plato == NULL)
 		return (EXIT_MALLOC_FAIL);
 	if (pthread_mutex_init(&alcibiades->hemlock, NULL) != 0)
@@ -48,27 +46,31 @@ int init_moniter(t_moniter *alcibiades, char **argv)
 
 int init_plato(t_moniter *alcibiades, char **argv)
 {
-	int i;
+	int			i;
+	pthread_t	grim;
 
 	i = 0;
 	while (i < alcibiades->rsvps)
 	{
-		alcibiades->plato[i] = malloc(sizeof(t_plato));
-		fill_plato(alcibiades->plato[i], argv,  alcibiades);
-		alcibiades->plato[i]->id = i + 1;
-		alcibiades->plato[i]->l_fork  = NULL;
-		if (init_mutexes(alcibiades->plato[i]) != 0)
+		fill_plato(&alcibiades->plato[i], argv,  alcibiades);
+		alcibiades->plato[i].id = i + 1;
+		alcibiades->plato[i].l_fork  = NULL;
+		if (init_mutexes(&alcibiades->plato[i]) != 0)
 			return (EXIT_MUTEX_INIT_ERROR);
-		if (i < alcibiades->rsvps)	
-			alcibiades->plato[i]->l_fork = &alcibiades->plato[i + 1]->r_fork;
-		else if (i == alcibiades->rsvps)
-			alcibiades->plato[i]->l_fork = &alcibiades->plato[0]->r_fork;
-		if (pthread_create(&alcibiades->plato[i]->thread, NULL, \
-			&symp_routine, &alcibiades) != 0)
+		if (i < alcibiades->rsvps - 1)	
+			alcibiades->plato[i].l_fork = &alcibiades->plato[i + 1].r_fork;
+		else if (i == alcibiades->rsvps - 1)
+			alcibiades->plato[i].l_fork = &alcibiades->plato[0].r_fork;
+		if (pthread_create(&grim, NULL, &death_routine, &alcibiades) != 0)
 			return (EXIT_THREADS_ERROR);
-		print_structs(alcibiades->plato[i]);
+		if (pthread_create(&alcibiades->plato[i].thread, NULL, \
+			&symp_routine, &alcibiades->plato[i]) != 0)
+			return (EXIT_THREADS_ERROR);
+		print_structs(&alcibiades->plato[i]);
 		i++;
 	}
+	if (pthread_join(grim, NULL) != 0)
+		return (EXIT_FAILURE);
 	return (0);
 }
 /*

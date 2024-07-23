@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 20:18:55 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:58:18 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_moniter
 	bool			hemlock_taken;
 	pthread_mutex_t	hemlock;
 	pthread_mutex_t	print_lock;
-	t_plato			**plato;
+	t_plato			*plato;
 }	t_moniter;
 
 /* ************************************************************************** */
@@ -102,6 +102,7 @@ void cleanup(t_plato *plato, t_moniter *data);
 /*									routine									  */
 /* ************************************************************************** */
 void *symp_routine(void *ptr);
+void *death_routine(void *ptr);
 
 /* ************************************************************************** */
 /*									locks									  */

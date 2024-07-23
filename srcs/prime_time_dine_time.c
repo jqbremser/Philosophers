@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:39:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 17:49:19 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:50:03 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ int handle_error(int errno, t_moniter *alcibiades)
 	return (errno);
 }
 
+static int join_threads(t_moniter *alcibiades)
+{
+	int i;
+
+	i = 0;
+	while (i < alcibiades->rsvps)
+	{
+		if (pthread_join(alcibiades->plato[i].thread, NULL) != 0)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_moniter alcibiades;
@@ -39,5 +53,7 @@ int main(int argc, char **argv)
 		return(handle_error(EXIT_INIT_ERROR, &alcibiades));
 	if (init_plato(&alcibiades, argv) != 0)
 		return (handle_error(EXIT_INIT_ERROR, &alcibiades));
+	if (join_threads(&alcibiades) != 0)
+		return (handle_error(EXIT_THREADS_ERROR, &alcibiades));
 	return (0);
 }
