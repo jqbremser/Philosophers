@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/23 17:58:18 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:23:30 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include <limits.h>
 # define FT_LONG_MAX 9223372036854775807L
 
-# define FORK	"has taken a fork"
+# define RFORK	"has taken a right fork"
+# define LFORK	"has taken a left fork"
+
 # define EATING		"is eating"
 # define SLEEPING	"is sleeping"
 # define THINKING	"is thinking"
@@ -35,14 +37,15 @@ typedef enum s_error_code
 	EXIT_INIT_ERROR = 202,
 	EXIT_MALLOC_FAIL = 203,
 	EXIT_MUTEX_INIT_ERROR = 204,
-	EXIT_THREADS_ERROR = 205
+	EXIT_THREADS_ERROR = 205,
+	EXIT_PLATO_ERROR = 206
 }	t_error;
 
 typedef struct s_plato
 {
 	int					id;
 	struct	s_moniter	*alcibiades;
-	int					hemlock_time;
+	size_t					hemlock_time;
 	int					dinner_bell;
 	int					drunken_stupor;
 	int					feasts;
@@ -52,7 +55,7 @@ typedef struct s_plato
 	int					meals_consumed;
 	size_t				meal_time;
 	bool				full;
-	bool				hemlock_taken;
+	bool				*hemlock_taken;
 	pthread_mutex_t		r_fork;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		meal_lock;
@@ -107,7 +110,7 @@ void *death_routine(void *ptr);
 /* ************************************************************************** */
 /*									locks									  */
 /* ************************************************************************** */
-void print_message(const char *message, t_plato *plato, int dead);
+int print_message(const char *message, t_plato *plato);
 int is_alive(t_plato *plato);
 
 #endif

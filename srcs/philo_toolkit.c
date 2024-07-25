@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 12:54:47 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/15 16:41:31 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:44:28 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void print_structs(t_plato *plato)
 {
 	printf("\nPHILO ID:%d\n", plato->id);
 	printf("rsvps:%d\n", plato->alcibiades->rsvps);
-	printf("Hemlock_time:%d\n", plato->hemlock_time);
+	printf("Hemlock_time:%zu\n", plato->hemlock_time);
 	printf("Dinner_bell:%d\n", plato->dinner_bell);
 	printf("Drunken_stupor:%d\n", plato->drunken_stupor);
 	printf("Feasts:%d\n", plato->feasts);
