@@ -53,15 +53,15 @@ static int drink_wine(t_philo *philo)
 
 static int eat(t_philo *philo)
 {
-
 	pthread_mutex_lock(&philo->overseer->hemlock);
 	if (philo->overseer->hemlock_taken == true)
 		return (1);
 	pthread_mutex_unlock(&philo->overseer->hemlock);
-	pthread_mutex_lock(&philo->r_fork);
+	pthread_mutex_lock(&philo->r_fork);   //if fails return 1;
 	print_message(RFORK, philo);
-	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(philo->l_fork); //check if it has right fork, before picking up, if fails return 1; and if it fails while holding rfork, drop(unlock mutex) the right fork
 	print_message(LFORK, philo);
+	//ONCE THE PHILO HAS PICKED UP TWO FORKS, then and only then can he eat. 
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->meal_time = update_krono(philo->overseer->symposium_start);
 //	printf("meal_time: %zu\n", philo->meal_time);
@@ -69,10 +69,12 @@ static int eat(t_philo *philo)
 	print_message(EATING, philo); 
 	ft_usleep(philo->dinner_bell);
 	pthread_mutex_unlock(&philo->meal_lock);
-	pthread_mutex_unlock(&philo->r_fork);
+	pthread_mutex_unlock(&philo->r_fork);  //a new helper function to drop the forks when eating is completing, and this will be the part that will unlock the lrfork mutexes
 	pthread_mutex_unlock(philo->l_fork);
 	return (0);
 }
+
+
 
 void *symp_routine(void *ptr)
 {
