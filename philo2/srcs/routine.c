@@ -44,7 +44,7 @@ int hemlocked(t_monitor *overseer)
 	if (overseer->hemlock_taken)
 		{
 		pthread_mutex_unlock(&overseer->hemlock);
-		printf("HEMLOCKED\n");
+		// printf("HEMLOCKED\n");
 		return (1);
 		}
 	pthread_mutex_unlock(&overseer->hemlock);
@@ -118,7 +118,6 @@ void *symp_routine(void *ptr)
 	pthread_mutex_unlock(&philo->overseer->symposium_lock);
 	if (philo->overseer->rsvps == 1)
 	{	
-		printf("Single philo:\n");
 		ostracize_socrates(philo);
 	}
 	if (philo->id % 2 == 0)

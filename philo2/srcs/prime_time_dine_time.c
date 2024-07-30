@@ -25,6 +25,7 @@
 // 			return (EXIT_FAILURE);
 // 		i++;
 // 	}
+// 	printf("after join threads\n");
 // 	return (0);
 // }
 
@@ -55,9 +56,7 @@ static int you_can_call_me_al(t_monitor *al)
 				al->hemlock_taken = true;
 				pthread_mutex_unlock(&al->hemlock);
 				pthread_mutex_lock(&al->print_lock);
-//				time = kronosophize() - (al->philo[i].symposium_start);
-				printf("%zu %d %s\n", update_krono
-						(al->symposium_start),  al->philo->id, DIED);
+				printf("%zu %d %s\n", time, al->philo->id, DIED);
 				pthread_mutex_unlock(&al->print_lock);
 				return (1);
 			}
@@ -86,7 +85,7 @@ static int terminate(t_monitor *overseer)
 	i = 0;
 	if (overseer->philo == NULL || overseer == NULL)
 		return (0);
-	// join_threads(overseer);  WHEN DO I JOIN THREADS IF EVER?
+	// join_threads(overseer); // WHEN DO I JOIN THREADS IF EVER?
 	while (i < overseer->rsvps)
 	{
 		pthread_mutex_destroy(&overseer->philo[i].r_fork);
