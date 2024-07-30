@@ -22,13 +22,15 @@
 # include <limits.h>
 # define FT_LONG_MAX 9223372036854775807L
 
-# define RFORK	"has taken a fork"
-# define LFORK	"has taken a fork"
+# define RFORK	"has taken a right fork"
+# define LFORK	"has taken a left fork"
 
-# define EATING		"is eating"
-# define SLEEPING	"is sleeping"
-# define THINKING	"is thinking"
+# define EATING		"is gorging"
+# define SLEEPING	"is drinking"
+# define THINKING	"is pontificating"
 # define DIED		"has taken hemlock"
+# define SOCRATES	"\nIf you think that by killing men you can prevent\nsome one from censuring your evil lives, you are mistaken;\nthat is not a way of escape which is either possible or honourable;\nthe easiest and the noblest way is not to be disabling others,\nbut to be improving yourselves.\n\n-Socrates\n\n"
+
 
 typedef enum s_error_code
 {
@@ -38,7 +40,8 @@ typedef enum s_error_code
 	EXIT_MALLOC_FAIL = 203,
 	EXIT_MUTEX_INIT_ERROR = 204,
 	EXIT_THREADS_ERROR = 205,
-	EXIT_philo_ERROR = 206
+	EXIT_PHILO_ERROR = 206,
+	EXIT_AL_ERROR = 207
 }	t_error;
 
 typedef struct s_philo
@@ -109,7 +112,7 @@ void cleanup(t_philo *philo, t_monitor *data);
 /* ************************************************************************** */
 void *symp_routine(void *ptr);
 void *death_routine(void *ptr);
-
+int hemlocked(t_monitor *overseer);
 /* ************************************************************************** */
 /*									locks									  */
 /* ************************************************************************** */

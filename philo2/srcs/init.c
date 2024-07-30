@@ -14,7 +14,6 @@
 
 static void fill_philo(t_philo *philo, char **argv, t_monitor *overseer)
 {
-//		memset(philo, 0, sizeof(t_philo));
 		philo->overseer = overseer;
 		philo->symposium_start = &overseer->symposium_start;
 		philo->meal_time = 0;
@@ -48,18 +47,28 @@ int init_monitor(t_monitor *overseer, char **argv)
 	return (0);
 }
 
+// static int join_threads(t_monitor *overseer)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	printf("in join threads\n");
+// 	while (i < overseer->rsvps)
+// 	{
+// 		if (pthread_join(overseer->philo[i].thread, NULL) != 0)
+// 			return (EXIT_FAILURE);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 int init_philo(t_monitor *overseer, char **argv)
 {
 	int			i;
- //	pthread_t	grim;
 
 	i = 0;
-//	printf("start_time: %zu\n", time);
-//	time = update_krono(time);
-//	printf("updated_time: %zu\n", time);
 	while (i < overseer->rsvps)
 	{	
-//		printf("init_time: %zu\n", overseer->philo[i].symposium_start);
 		fill_philo(&overseer->philo[i], argv,  overseer);
 		overseer->philo[i].id = i + 1;
 		overseer->philo[i].l_fork  = NULL;
@@ -78,47 +87,10 @@ int init_philo(t_monitor *overseer, char **argv)
 //		print_structs(&overseer->philo[i]);
 		i++;
 	}
+	//join_threads(overseer);
 	overseer->symposium_start = kronosophize();
 	pthread_mutex_unlock(&overseer->symposium_lock);	
+	// printf("init philo safe\n");
 	return (0);
 }
-	/*printf("Before grim\n");
-	if (pthread_create(&grim, NULL, &death_routine, &overseer) != 0)
-	{
-		printf("Inside grim thread\n");
-		return (EXIT_THREADS_ERROR);
-	}
-	if (pthread_join(grim, NULL) != 0)
-	{	
-		printf("Thread Join Error\n");
-		return (EXIT_FAILURE);
-	}*/
-/*
-static int check_status(t_philo *philo, t_monitor *data)
-{
-	int i;
-
-	i = 0;
-// this is all nonsense as of this point	
-	while (i <= data->rsvps)
-	{
-		if (philo->id == i)
-		{
-			if (philo->hemlock == true)
-			{
-				printf("Philo %d has died at %zu\n", philo->id, data->current_time);
-				return (1);
-			}
-			if (data->feasts > 0)
-			{	if (philo->meals_consumed > data->feasts)
-				{
-					printf("Philo %d is full\n", philo->id); 
-					return (2);
-				}
-			}
-		}
-	i++;
-	}
-	return (0);
-}
-*/
+	

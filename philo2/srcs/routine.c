@@ -38,7 +38,7 @@ void *death_routine(void *ptr)
 	}
 	return (0);
 }*/
-static int hemlocked(t_monitor *overseer)
+int hemlocked(t_monitor *overseer)
 {
 	pthread_mutex_lock(&overseer->hemlock);
 	if (overseer->hemlock_taken)

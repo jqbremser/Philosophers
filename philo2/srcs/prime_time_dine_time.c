@@ -12,36 +12,21 @@
 
 #include "../symposium.h"
 
-int handle_error(int errno, t_monitor *overseer)
-{
-	if (errno == EXIT_ARG_COUNT_ERROR)
-		(void)!write(2, "Invalid amount of Args\n", 24);
-	else if (errno == EXIT_INVALID_ARGS)
-		(void)!write(2, "Invalid Arguments\n", 19);
-	else if (errno == EXIT_philo_ERROR)
-		(void)!write(2, "philo Error\n", 13);
-	else if (errno == EXIT_INIT_ERROR)
-	{
-		if (overseer->philo != NULL)
-			free(overseer->philo);
-		(void)!write(2, "Error init monitor\n", 20);
-	}
-	return (errno);
-}
 
-static int join_threads(t_monitor *overseer)
-{
-	int i;
+// static int join_threads(t_monitor *overseer)
+// {
+// 	int i;
 
-	i = 0;
-	while (i < overseer->rsvps)
-	{
-		if (pthread_join(overseer->philo[i].thread, NULL) != 0)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	printf("in join threads\n");
+// 	while (i < overseer->rsvps)
+// 	{
+// 		if (pthread_join(overseer->philo[i].thread, NULL) != 0)
+// 			return (EXIT_FAILURE);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 static int you_can_call_me_al(t_monitor *al)
 {
@@ -52,7 +37,10 @@ static int you_can_call_me_al(t_monitor *al)
 	{	
 		i = 0;
 		if (al->full_philos >= al->rsvps)
-			return (1);
+		{
+			printf("full filos\n");
+			return (2);
+		}
 		while (i < al->rsvps)
 		{	
 			pthread_mutex_lock(&al->philo[i].meal_lock);
@@ -63,7 +51,6 @@ static int you_can_call_me_al(t_monitor *al)
 //			printf("symp:%zu\ncurr:%zu\nhem:%zu\n", al->philo[i].symposium_start, al->philo[i].current_time, al->philo[i].hemlock_time);
 			if (time >= al->philo[i].hemlock_time)
 			{
-				printf("DEATH:");
 				pthread_mutex_lock(&al->hemlock);
 				al->hemlock_taken = true;
 				pthread_mutex_unlock(&al->hemlock);
@@ -99,6 +86,7 @@ static int terminate(t_monitor *overseer)
 	i = 0;
 	if (overseer->philo == NULL || overseer == NULL)
 		return (0);
+	// join_threads(overseer);  WHEN DO I JOIN THREADS IF EVER?
 	while (i < overseer->rsvps)
 	{
 		pthread_mutex_destroy(&overseer->philo[i].r_fork);
@@ -112,7 +100,30 @@ static int terminate(t_monitor *overseer)
 	pthread_mutex_destroy(&overseer->print_lock);
 	free(overseer->philo);
 	overseer->philo = NULL;
+	printf(SOCRATES);
 	return (0);
+}
+
+int handle_error(int errno, t_monitor *overseer)
+{
+	if (errno == EXIT_ARG_COUNT_ERROR)
+		(void)!write(2, "Invalid amount of Args\n", 24);
+	else if (errno == EXIT_INVALID_ARGS)
+		(void)!write(2, "Invalid Arguments\n", 19);
+	else if (errno == EXIT_PHILO_ERROR)
+		(void)!write(2, "philo Error\n", 13);
+	else if (errno == EXIT_INIT_ERROR)
+	{
+		if (overseer->philo != NULL)
+			free(overseer->philo);
+		(void)!write(2, "Error init monitor\n", 20);
+		pthread_mutex_destroy(&overseer->symposium_lock);
+		pthread_mutex_destroy(&overseer->hemlock);
+		pthread_mutex_destroy(&overseer->print_lock);
+	}
+	else if (errno == EXIT_AL_ERROR)
+		terminate(overseer);
+	return (errno);
 }
 
 int main(int argc, char **argv)
@@ -126,11 +137,8 @@ int main(int argc, char **argv)
 	if (init_monitor(&overseer, argv) != 0)
 		return(handle_error(EXIT_INIT_ERROR, &overseer));
 	if (init_philo(&overseer, argv) != 0)
-		return (handle_error(EXIT_philo_ERROR, &overseer));
+		return (handle_error(EXIT_PHILO_ERROR, &overseer));
 	if (you_can_call_me_al(&overseer) != 0)
-		return (handle_error(EXIT_THREADS_ERROR, &overseer));	
-	if (join_threads(&overseer) != 0)
-		return (handle_error(EXIT_THREADS_ERROR, &overseer));
-	terminate(&overseer);
+		return (handle_error(EXIT_AL_ERROR, &overseer));	
 	return (0);
 }
