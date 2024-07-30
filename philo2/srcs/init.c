@@ -17,6 +17,7 @@ static void fill_philo(t_philo *philo, char **argv, t_monitor *overseer)
 //		memset(philo, 0, sizeof(t_philo));
 		philo->overseer = overseer;
 		philo->symposium_start = &overseer->symposium_start;
+		philo->meal_time = 0;
 		philo->hemlock_taken = &overseer->hemlock_taken;
 		philo->hemlock_time = ft_atol(argv[2]);
 		philo->dinner_bell = ft_atol(argv[3]);
@@ -33,6 +34,7 @@ int init_monitor(t_monitor *overseer, char **argv)
 	overseer->full_philos = 0;
 	overseer->rsvps = ft_atol(argv[1]);
 	overseer->hemlock_taken = false;
+	overseer->all_fed = false;
 	overseer->philo = malloc(sizeof(t_philo) * overseer->rsvps);
 	if (overseer->philo == NULL)
 		return (EXIT_MALLOC_FAIL);

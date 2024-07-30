@@ -62,7 +62,7 @@ int check_args(char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (ft_atol(argv[i]) < 0)
+		if (ft_atol(argv[i]) <= 0)
 			return (EXIT_INVALID_ARGS);
 		if (isdigit(ft_atol(argv[i])) == 1)
 			return (EXIT_INVALID_ARGS);
@@ -81,7 +81,7 @@ void print_structs(t_philo *philo)
 	printf("\nPHILO ID:%d\n", philo->id);
 	printf("rsvps:%d\n", philo->overseer->rsvps);
 	printf("hemlock_time:%zu\n", philo->hemlock_time);
-	printf("Dinner_bell:%d\n", philo->dinner_bell);
+	printf("Dinner_bell:%ld\n", philo->dinner_bell);
 	printf("Drunken_stupor:%d\n", philo->drunken_stupor);
 	printf("Feasts:%d\n", philo->feasts);
 	printf("Start of Symposium:%zu\n", philo->overseer->symposium_start);

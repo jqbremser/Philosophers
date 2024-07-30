@@ -46,7 +46,7 @@ typedef struct s_philo
 	int					id;
 	struct	s_monitor	*overseer;
 	size_t					hemlock_time;
-	int					dinner_bell;
+	size_t					dinner_bell;
 	int					drunken_stupor;
 	int					feasts;
 	size_t				*symposium_start;
@@ -66,6 +66,7 @@ typedef struct s_monitor
 	size_t			symposium_start;
 	int				rsvps;
 	int				full_philos;
+	bool			all_fed;
 	bool			hemlock_taken;
 	pthread_mutex_t	symposium_lock;
 	pthread_mutex_t	hemlock;

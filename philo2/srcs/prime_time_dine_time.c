@@ -54,13 +54,16 @@ static int you_can_call_me_al(t_monitor *al)
 		if (al->full_philos >= al->rsvps)
 			return (1);
 		while (i < al->rsvps)
-		{
-			time = (update_krono(al->symposium_start) - al->philo[i].meal_time);
-//			printf("Inside AL i: %d \n", i);
+		{	
+			pthread_mutex_lock(&al->philo[i].meal_lock);
+			time = 0;
+			time = (kronosophize() - al->symposium_start - al->philo[i].meal_time);
+			pthread_mutex_unlock(&al->philo[i].meal_lock);
+			//			printf("Inside AL i: %d \n", i);
 //			printf("symp:%zu\ncurr:%zu\nhem:%zu\n", al->philo[i].symposium_start, al->philo[i].current_time, al->philo[i].hemlock_time);
 			if (time >= al->philo[i].hemlock_time)
 			{
-//				printf("DEATH:");
+				printf("DEATH:");
 				pthread_mutex_lock(&al->hemlock);
 				al->hemlock_taken = true;
 				pthread_mutex_unlock(&al->hemlock);
