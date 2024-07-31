@@ -47,7 +47,7 @@ typedef enum s_error_code
 typedef struct s_philo
 {
 	int					id;
-	struct	s_monitor	*overseer;
+	struct	s_moniter	*overseer;
 	size_t					hemlock_time;
 	size_t					dinner_bell;
 	int					drunken_stupor;
@@ -64,7 +64,7 @@ typedef struct s_philo
 	pthread_mutex_t		meal_lock;
 }	t_philo;
 
-typedef struct s_monitor
+typedef struct s_moniter
 {	
 	size_t			symposium_start;
 	int				rsvps;
@@ -75,7 +75,7 @@ typedef struct s_monitor
 	pthread_mutex_t	hemlock;
 	pthread_mutex_t	print_lock;
 	t_philo			*philo;
-}	t_monitor;
+}	t_moniter;
 
 /* ************************************************************************** */
 /*									philo_toolkit							  */
@@ -88,8 +88,8 @@ int check_args(char **argv);
 /* ************************************************************************** */
 /*									init									  */
 /* ************************************************************************** */
-int init_monitor(t_monitor *overseer, char **argv);
-int init_philo(t_monitor *overseer, char **argv);
+int init_moniter(t_moniter *overseer, char **argv);
+int init_philo(t_moniter *overseer, char **argv);
 
 
 /* ************************************************************************** */
@@ -97,22 +97,25 @@ int init_philo(t_monitor *overseer, char **argv);
 /* ************************************************************************** */
 size_t kronosophize(void);
 size_t update_krono(size_t start_time);
-void ft_usleep(size_t mili);
+void ft_usleep(size_t mili, t_moniter *overseer);
 
 /* ************************************************************************** */
 /*									mutex									  */
 /* ************************************************************************** */
 int destroy_fork_mutexes(t_philo* philo);
-int clean_data(t_monitor *data);
+int clean_data(t_moniter *data);
 int	init_mutexes(t_philo *philo);
-void cleanup(t_philo *philo, t_monitor *data);
+void cleanup(t_philo *philo, t_moniter *data);
 
 /* ************************************************************************** */
 /*									routine									  */
 /* ************************************************************************** */
 void *symp_routine(void *ptr);
 void *death_routine(void *ptr);
-int hemlocked(t_monitor *overseer);
+int hemlocked(t_moniter *overseer);
+int is_full(t_moniter *al);
+void ostracize(t_moniter *al);
+
 /* ************************************************************************** */
 /*									locks									  */
 /* ************************************************************************** */

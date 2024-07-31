@@ -21,21 +21,20 @@ size_t kronosophize(void)
 	return(time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void ft_usleep(size_t mili)
+void ft_usleep(size_t mili, t_moniter *overseer)
 {
-	 long start;
+	long start;
 	 
-
 	start = kronosophize();
-	while ((kronosophize() - start) < mili)
+	while ((kronosophize() - start) < mili || !hemlocked(overseer))
 		usleep(500);
 }
 
-size_t update_krono(size_t start_time)
-{
-	struct timeval current_time;
+// size_t update_krono(size_t start_time)
+// {
+// 	struct timeval current_time;
 
-	gettimeofday(&current_time, NULL);
-	return((current_time.tv_sec * 1000 + current_time.tv_usec / 1000) - start_time);
-}
+// 	gettimeofday(&current_time, NULL);
+// 	return((current_time.tv_sec * 1000 + current_time.tv_usec / 1000) - start_time);
+// }
 

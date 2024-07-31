@@ -48,7 +48,7 @@ int destroy_fork_mutexes(t_philo* philo)
 	return(0);
 }
 
-void cleanup(t_philo *philo, t_monitor *data)
+void cleanup(t_philo *philo, t_moniter *data)
 {
 	destroy_fork_mutexes(philo);
 	destroy_philo_mutexes(philo);
@@ -56,7 +56,7 @@ void cleanup(t_philo *philo, t_monitor *data)
 	free(data);
 }
 
-int clean_data(t_monitor *data)
+int clean_data(t_moniter *data)
 {
 	free(data);
 	printf("Data cleaned\n");

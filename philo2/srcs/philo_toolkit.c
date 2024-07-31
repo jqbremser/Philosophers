@@ -88,7 +88,7 @@ void print_structs(t_philo *philo)
 	printf("Current time: %zu\n", philo->current_time);
 	printf("Meals consumed: %d\n\n", philo->meals_consumed);
 //	int i = 0;
-//	while (i < monitor.rsvps)
+//	while (i < moniter.rsvps)
 //	{
 //		printf("Philo#%d:%d\n", i + 1, philo[i].id);
 //		printf("Philo#%d meals consumed:%d\n", philo[i].id, philo[i].meals_consumed);

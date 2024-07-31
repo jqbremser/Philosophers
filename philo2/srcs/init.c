@@ -12,7 +12,7 @@
 
 #include "../symposium.h"
 
-static void fill_philo(t_philo *philo, char **argv, t_monitor *overseer)
+static void fill_philo(t_philo *philo, char **argv, t_moniter *overseer)
 {
 		philo->overseer = overseer;
 		philo->symposium_start = &overseer->symposium_start;
@@ -27,7 +27,7 @@ static void fill_philo(t_philo *philo, char **argv, t_monitor *overseer)
 			philo->feasts = -1;
 }
 
-int init_monitor(t_monitor *overseer, char **argv)
+int init_moniter(t_moniter *overseer, char **argv)
 {
 	overseer->philo = NULL;
 	overseer->full_philos = 0;
@@ -47,7 +47,7 @@ int init_monitor(t_monitor *overseer, char **argv)
 	return (0);
 }
 
-// static int join_threads(t_monitor *overseer)
+// static int join_threads(t_moniter *overseer)
 // {
 // 	int i;
 
@@ -62,7 +62,7 @@ int init_monitor(t_monitor *overseer, char **argv)
 // 	return (0);
 // }
 
-int init_philo(t_monitor *overseer, char **argv)
+int init_philo(t_moniter *overseer, char **argv)
 {
 	int			i;
 

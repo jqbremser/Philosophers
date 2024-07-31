@@ -16,29 +16,22 @@ static void *ostracize_socrates(t_philo *socrates)
 {
 	pthread_mutex_lock(&socrates->r_fork);
 	print_message(RFORK, socrates);
-	ft_usleep(socrates->hemlock_time);
+	ft_usleep(socrates->hemlock_time, socrates->overseer);
 	pthread_mutex_unlock(&socrates->r_fork);
 	pthread_mutex_lock(&socrates->overseer->hemlock);
 	socrates->overseer->hemlock_taken = true;
 	pthread_mutex_unlock(&socrates->overseer->hemlock);
 	return (NULL);
 }
-/*
-void *death_routine(void *ptr)
-{
-	t_monitor *grim;
-	int i;
 
-	i = 0;
-	grim = (t_monitor *)ptr;
-	if (is_alive(grim->philo))
-	{	
-		printf("Grim Failed\n");
-		print_message(DIED, grim->philo, 1);
-	}
-	return (0);
-}*/
-int hemlocked(t_monitor *overseer)
+void ostracize(t_moniter *al)
+{
+	pthread_mutex_lock(&al->hemlock);
+	al->hemlock_taken = true;
+	pthread_mutex_unlock(&al->hemlock);
+}
+
+int hemlocked(t_moniter *overseer)
 {
 	pthread_mutex_lock(&overseer->hemlock);
 	if (overseer->hemlock_taken)
@@ -53,14 +46,10 @@ int hemlocked(t_monitor *overseer)
 
 static int drink_wine(t_philo *philo)
 {
-	// pthread_mutex_lock(&philo->overseer->hemlock);
-	// if (philo->overseer->hemlock_taken == true)
-	// 	return (1);
-	// pthread_mutex_unlock(&philo->overseer->hemlock);
 	if (hemlocked(philo->overseer))
 		return (1);	
 	print_message(SLEEPING, philo);
-	ft_usleep(philo->drunken_stupor);
+	ft_usleep(philo->drunken_stupor, philo->overseer);
 	return (0);
 }
 
@@ -73,22 +62,52 @@ static int dine_time(t_philo *philo)
 		return (1);
 	philo->meals_consumed++;
 	print_message(EATING, philo);
-	// if (philo->dinner_bell <= philo->hemlock_time) 
-		ft_usleep(philo->dinner_bell);
+	ft_usleep(philo->dinner_bell, philo->overseer);
 	// else
 		// return (1);		
 	return(0);
 }
 
+int is_full(t_moniter *al)
+{
+	pthread_mutex_lock(&al->symposium_lock);		
+	if (al->full_philos >= al->rsvps)
+	{
+		al->all_fed = true;
+		pthread_mutex_unlock(&al->symposium_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&al->symposium_lock);
+	return (0);
+}
 
+static int therefore_i_am(t_philo *philo, pthread_mutex_t *rfork, pthread_mutex_t *lfork)
+{
+	if ((hemlocked(philo->overseer)) || (is_full(philo->overseer)))
+	{
+		if (rfork)
+			pthread_mutex_unlock(&philo->r_fork);
+		if (lfork)
+			pthread_mutex_unlock(philo->l_fork);
+		// printf("Inside therefore_i_am\n");
+		return (1);
+	}
+	return (0);
+}
 
 static int eat(t_philo *philo)
 {
+ 	if (therefore_i_am(philo, NULL, NULL))
+ 		return (1);
 	if (pthread_mutex_lock(&philo->r_fork) == 0)
 	{
+ 		if (therefore_i_am(philo, &philo->r_fork, NULL))
+ 			return (1);	
 		print_message(RFORK, philo);
 		if (pthread_mutex_lock(philo->l_fork) == 0)
 		{
+			if (therefore_i_am(philo, &philo->r_fork, philo->l_fork))
+ 				return (1);	
 			print_message(LFORK, philo);
 			if (dine_time(philo) == 0)
 			{
@@ -121,10 +140,9 @@ void *symp_routine(void *ptr)
 		ostracize_socrates(philo);
 	}
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->dinner_bell / 10);
-	while (!(hemlocked(philo->overseer)))
+		ft_usleep(philo->dinner_bell / 10, philo->overseer);
+	while (!therefore_i_am(philo, NULL, NULL))
 	{
-		//		printf("Inside symp loop\n");
 		if (eat(philo) == 1)
 			break ;
 		if (drink_wine(philo) == 1)
@@ -168,4 +186,4 @@ void *symp_routine(void *ptr)
 // 	pthread_mutex_unlock(&philo->r_fork);  //a new helper function to drop the forks when eating is completing, and this will be the part that will unlock the lrfork mutexes
 // 	pthread_mutex_unlock(philo->l_fork);
 // 	return (0);
-// }
+// // }

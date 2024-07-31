@@ -12,7 +12,6 @@
 
 #include "../symposium.h"
 
-
 int is_alive(t_philo *philo)
 {
 	int alive;
@@ -29,15 +28,16 @@ int is_alive(t_philo *philo)
 int print_message(const char *message, t_philo *philo)
 {
 	unsigned int time;
-
-	pthread_mutex_lock(&philo->overseer->hemlock);
-	if (philo->overseer->hemlock_taken == true)
+	
+	// printf("hemlocked: %i, is_full: %i \n", hemlocked(philo->overseer), is_full(philo->overseer));
+	if (hemlocked(philo->overseer) || (is_full(philo->overseer)))
+		{
+		// printf("Hemlocked\n");	
 		return (1);
-	pthread_mutex_unlock(&philo->overseer->hemlock);
+		}
 	time = kronosophize() - (philo->overseer->symposium_start);
 	pthread_mutex_lock(&philo->overseer->print_lock);
 	printf("%u %d %s\n", time, philo->id, message);
 	pthread_mutex_unlock(&philo->overseer->print_lock);
 	return (0);
 }
-

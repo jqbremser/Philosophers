@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		=	philosophize
+NAME 		=	philo
 
 FLAGS 		=	-Wall -Werror -Wextra -g
 FILES		=	prime_time_dine_time.c \
