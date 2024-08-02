@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:36:19 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/02 14:16:33 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:01:44 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,15 @@ void *symp_routine(void *ptr)
     while (1)
     {
         if (eat(philo))
+     {
+        printf("EATBREAK\n");
             break ;
+    }
         if (eep_eep(philo))
+        {
+            printf("EEPBREAK\n");
             break ;
+        }
         print_message(THINKING, philo);
     }
     return (ptr);    

@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:48:58 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/01 23:02:09 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:06:19 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int hemlocked(t_moniter *overseer)
     if (overseer->hemlock_taken)
     {
         pthread_mutex_unlock(&overseer->hemlock);
+        // printf("Hemlocked returning 1\n");
         return (1);
     }
     pthread_mutex_unlock(&overseer->hemlock);

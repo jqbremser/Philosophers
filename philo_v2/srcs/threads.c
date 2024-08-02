@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:51 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/02 13:54:26 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:53:03 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static int monitering(t_moniter *al)
             if (al->philo[i].meal_time >= al->philo[i].time_to_die)
 			{
                 // printf("Here, i: %d, id: %d, meal_time: %ld, time to die: %ld\n", i, al->philo[i].id, al->philo[i].meal_time , al->philo[i].time_to_die);
+                pthread_mutex_unlock(&al->philo[i].meal_lock);
                 ostracize(al);
 				pthread_mutex_lock(&al->print_lock);
 				printf("%zu %d %s\n", time, al->philo->id, DIED);
 				pthread_mutex_unlock(&al->print_lock);
-                pthread_mutex_unlock(&al->philo[i].meal_lock);
                 return (1);
             }
             pthread_mutex_unlock(&al->philo[i].meal_lock);
