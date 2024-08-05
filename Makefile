@@ -6,13 +6,13 @@
 #    By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 13:29:28 by jbremser          #+#    #+#              #
-#    Updated: 2024/08/05 14:43:57 by jbremser         ###   ########.fr        #
+#    Updated: 2024/08/05 16:16:30 by jbremser         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	philo
 
-FLAGS 		=	-Wall -Werror -Wextra -g
+FLAGS 		=	-Wall -Werror -Wextra -g -pthread
 FILES		=	main.c \
 				helpers.c \
 				init.c \
