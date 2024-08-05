@@ -1,0 +1,400 @@
+Socrates
+Plato
+Aristotle
+Confucius
+René Descartes
+Marcus Aurelius
+Alan Watts
+Thales
+Anaximander
+Anaximenes
+Heraclitus
+Parmenides
+Zeno of Elea
+Empedocles
+Anaxagoras
+Democritus
+Protagoras
+Gorgias
+Prodicus
+Hippias
+Antisthenes
+Diogenes of Sinope
+Aristippus
+Euclid of Megara
+Eubulides
+Pyrrho
+Epicurus
+Zeno of Citium
+Cleanthes
+Chrysippus
+Carneades
+Clitomachus
+Posidonius
+Epictetus
+Seneca
+Plotinus
+Porphyry
+Iamblichus
+Proclus
+Boethius
+Augustine of Hippo
+John Scotus Eriugena
+Anselm of Canterbury
+Peter Abelard
+Avicenna
+Al-Ghazali
+Averroes
+Moses Maimonides
+Thomas Aquinas
+John Duns Scotus
+William of Ockham
+Marsilio Ficino
+Giovanni Pico della Mirandola
+Niccolò Machiavelli
+Desiderius Erasmus
+Michel de Montaigne
+Francis Bacon
+Thomas Hobbes
+Blaise Pascal
+Baruch Spinoza
+John Locke
+Gottfried Wilhelm Leibniz
+George Berkeley
+David Hume
+Jean-Jacques Rousseau
+Voltaire
+Denis Diderot
+Immanuel Kant
+Johann Gottlieb Fichte
+Friedrich Wilhelm Joseph Schelling
+Georg Wilhelm Friedrich Hegel
+Arthur Schopenhauer
+Ludwig Feuerbach
+Karl Marx
+Søren Kierkegaard
+Friedrich Nietzsche
+Charles Sanders Peirce
+William James
+John Dewey
+Edmund Husserl
+Martin Heidegger
+Karl Jaspers
+Jean-Paul Sartre
+Simone de Beauvoir
+Maurice Merleau-Ponty
+Alfred North Whitehead
+Bertrand Russell
+Ludwig Wittgenstein
+George Edward Moore
+John Rawls
+Robert Nozick
+Jürgen Habermas
+Michel Foucault
+Jacques Derrida
+Gilles Deleuze
+Félix Guattari
+Richard Rorty
+Hilary Putnam
+Donald Davidson
+Saul Kripke
+Thomas Nagel
+Peter Singer
+Alvin Plantinga
+Daniel Dennett
+Martha Nussbaum
+Patricia Churchland
+David Chalmers
+Slavoj Žižek
+Cornel West
+Kwame Anthony Appiah
+Michel Serres
+Julia Kristeva
+Alain Badiou
+Judith Butler
+Giorgio Agamben
+Charles Taylor
+Paul Ricoeur
+Emmanuel Levinas
+Hans-Georg Gadamer
+Isaiah Berlin
+Willard Van Orman Quine
+Herbert Marcuse
+Theodor W. Adorno
+Max Horkheimer
+Hannah Arendt
+Iris Murdoch
+Simone Weil
+Gabriel Marcel
+Jean-Luc Nancy
+Bernard Stiegler
+Emmanuel Chukwudi Eze
+Achille Mbembe
+Lewis Gordon
+Frantz Fanon
+Ngũgĩ wa Thiong'o
+Chinua Achebe
+Gayatri Chakravorty Spivak
+Homi K. Bhabha
+Amartya Sen
+Martha C. Nussbaum
+Bhimrao Ramji Ambedkar
+Arundhati Roy
+Vandana Shiva
+Ashis Nandy
+Yoshihiko Uchida
+Nishida Kitaro
+Keiji Nishitani
+D.T. Suzuki
+Laozi
+Zhuangzi
+Mozi
+Xunzi
+Han Feizi
+Dong Zhongshu
+Zhu Xi
+Wang Yangming
+Miyamoto Musashi
+Nishida Kitaro
+Tetsuro Watsuji
+Tominaga Nakamoto
+Yukichi Fukuzawa
+Nishitani Keiji
+Chogyam Trungpa
+Tsongkhapa
+Atisha
+Nagarjuna
+Shantideva
+Dogen
+Eisai
+Kukai
+Nichiren
+Shinran
+Hakuin Ekaku
+Thich Nhat Hanh
+Sengzhao
+Sengcan
+Huineng
+Linji Yixuan
+Zhaozhou
+Seung Sahn
+Adi Shankara
+Ramanuja
+Madhva
+Swami Vivekananda
+Sri Aurobindo
+Rabindranath Tagore
+Mohandas Gandhi
+Jiddu Krishnamurti
+S. Radhakrishnan
+B. K. S. Iyengar
+Ramana Maharshi
+Daya Krishna
+Amartya Sen
+Martha Nussbaum
+Nalanda
+Naropa
+Asanga
+Vasubandhu
+Śāntarakṣita
+Padmasambhava
+"The only true wisdom is in knowing you know nothing."
+"The greatest wealth is to live content with little."
+"Knowing yourself is the beginning of all wisdom."
+"It does not matter how slowly you go as long as you do not stop."
+"I think, therefore I am."
+"You have power over your mind—not outside events. Realize this, and you will find strength."
+"The only way to make sense out of change is to plunge into it, move with it, and join the dance."
+"The most difficult thing in life is to know yourself."
+"Everything is generated from other things, and they perish into the same things according to necessity."
+"The invisible is what people want to see the most."
+"The only constant in life is change."
+"What is, is; what is not, is not."
+"Nothing comes from nothing."
+"The world is in a constant state of flux."
+"Man is the measure of all things."
+"There is no absolute truth, everything is subjective."
+"All things are in the state of becoming."
+"Nothing exists except atoms and empty space; everything else is opinion."
+"Man is the measure of all things."
+"Man is the measure of all things, of the reality of those that are, and of the unreality of those that are not."
+"Knowledge is perception."
+"Wise men speak because they have something to say; fools because they have to say something."
+"Freedom is the greatest fruit of self-sufficiency."
+"The only way to achieve the good life is through self-mastery."
+"The unexamined life is not worth living."
+"The aim of life is to live in agreement with nature."
+"Happiness is a good flow of life."
+"Fate leads the willing and drags along the reluctant."
+"Nothing is more hostile to a firm grasp on the truth than subjectivity."
+"Everything is good when it leaves the Creator's hands; everything degenerates in the hands of man."
+"If I am not for myself, who will be for me?"
+"The whole is more than the sum of its parts."
+"To live well and to live happily is the same thing."
+"The happiness of your life depends upon the quality of your thoughts."
+"There is nothing more terrible than ignorance in action."
+"Time is a moving image of eternity."
+"If you know, show that you know. If you don't know, then allow others to know."
+"Man is a rational animal."
+"The life which is unexamined is not worth living."
+"Faith is to believe what you do not see; the reward of this faith is to see what you believe."
+"Man is the measure of all things."
+"To be is to be perceived."
+"If a man will begin with certainties, he shall end in doubts; but if he will be content to begin with doubts, he shall end in certainties."
+"Man is born free, and everywhere he is in chains."
+"To live is to suffer, to survive is to find some meaning in the suffering."
+"God is dead! He remains dead! And we have killed him."
+"The brave man is he who overcomes not only his enemies but his pleasures."
+"The function of prayer is not to influence God, but rather to change the nature of the one who prays."
+"I am a part of all that I have met."
+"One cannot step twice in the same river."
+"Those who know do not speak. Those who speak do not know."
+"The dao that can be told is not the eternal Dao."
+"To know that you do not know is the best. To pretend to know when you do not know is a disease."
+"The more laws and order are made prominent, the more thieves and robbers there will be."
+"Great indeed is the sublimity of the Creative, to which all beings owe their beginning and which permeates all heaven."
+"To see a thing uncolored by one's own personal preferences and desires is to see it in its own pristine simplicity."
+"Love is composed of a single soul inhabiting two bodies."
+"We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+"Happiness is the meaning and the purpose of life, the whole aim and end of human existence."
+"I hear and I forget. I see and I remember. I do and I understand."
+"We are what we think. All that we are arises with our thoughts. With our thoughts, we make the world."
+"The man who asks a question is a fool for a minute, the man who does not ask is a fool for life."
+"Everything has beauty, but not everyone sees it."
+"Real knowledge is to know the extent of one's ignorance."
+"He who learns but does not think, is lost! He who thinks but does not learn is in great danger."
+"It does not matter how slowly you go as long as you do not stop."
+"The superior man is modest in his speech but exceeds in his actions."
+"What the superior man seeks is in himself; what the small man seeks is in others."
+"I will not be concerned at other men's not knowing me; I will be concerned at my own want of ability."
+"He who exercises government by means of his virtue may be compared to the north polar star, which keeps its place and all the stars turn towards it."
+"The superior man acts before he speaks, and afterwards speaks according to his actions."
+"A journey of a thousand miles begins with a single step."
+"The sage does not lay up treasures. The more he helps others, the more he benefits himself."
+"When I let go of what I am, I become what I might be."
+"He who knows, does not speak. He who speaks, does not know."
+"The further one goes, the less one knows."
+"Nature does not hurry, yet everything is accomplished."
+"The wise man does not lay up his own treasures. The more he gives to others, the more he has for his own."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"Knowing others is intelligence; knowing yourself is true wisdom."
+"If you realize that all things change, there is nothing you will try to hold on to."
+"Care about what other people think and you will always be their prisoner."
+"The flame that burns twice as bright burns half as long."
+"Those who flow as life flows know they need no other force."
+"The snow goose need not bathe to make itself white. Neither need you do anything but be yourself."
+"He who conquers others is strong; he who conquers himself is mighty."
+"He who knows that enough is enough will always have enough."
+"Be content with what you have; rejoice in the way things are. When you realize there is nothing lacking, the whole world belongs to you."
+"Health is the greatest possession. Contentment is the greatest treasure. Confidence is the greatest friend. Non-being is the greatest joy."
+"A good traveler has no fixed plans and is not intent on arriving."
+"To the mind that is still, the whole universe surrenders."
+"Do you have the patience to wait until your mud settles and the water is clear?"
+"To know yet to think that one does not know is best; Not to know yet to think that one knows will lead to difficulty."
+"The wise man does not fight; the wise man is never angry."
+"He who defends with love will be secure; Heaven will save him, and protect him with love."
+"Respond intelligently even to unintelligent treatment."
+"To understand the limitation of things, desire them."
+"To the giver comes the fullness of life: to the taker, just an empty hand."
+"Those who have knowledge, don't predict. Those who predict, don't have knowledge."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"When the best leader's work is done the people say, 'We did it ourselves.'"
+"The best fighter is never angry."
+"At the center of your being you have the answer; you know who you are and you know what you want."
+"Life is a series of natural and spontaneous changes. Don't resist them; that only creates sorrow."
+"He who is contented is rich."
+"Time is a created thing. To say 'I don't have time,' is like saying, 'I don't want to.'"
+"He who acts, destroys; he who grasps, loses."
+"One who is too insistent on his own views finds few to agree with him."
+"Silence is a source of great strength."
+"Be careful what you water your dreams with."
+"An ant on the move does more than a dozing ox."
+"To see things in the seed, that is genius."
+"There is no greater danger than underestimating your opponent."
+"Great acts are made up of small deeds."
+"He who knows that enough is enough will always have enough."
+"Give a man a fish and you feed him for a day. Teach him how to fish and you feed him for a lifetime."
+"To lead people walk behind them."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"The more you know yourself, the more you forgive yourself."
+"New beginnings are often disguised as painful endings."
+"The truth is not always beautiful, nor beautiful words the truth."
+"If you do not change direction, you may end up where you are heading."
+"Act without expectation."
+"He who obtains has little. He who scatters has much."
+"Be really whole and all things will come to you."
+"Music in the soul can be heard by the universe."
+"When the best leader's work is done the people say, 'We did it ourselves.'"
+"Knowledge is a treasure, but practice is the key to it."
+"A clever mind is not a heart. Knowledge doesn't really care, wisdom does."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"To see things in the seed, that is genius."
+"He who knows, does not speak. He who speaks, does not know."
+"At the center of your being you have the answer; you know who you are and you know what you want."
+"Care about what other people think and you will always be their prisoner."
+"The sage does not lay up treasures. The more he helps others, the more he benefits himself."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"He who knows others is wise. He who knows himself is enlightened."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"A journey of a thousand miles begins with a single step."
+"New beginnings are often disguised as painful endings."
+"The truth is not always beautiful, nor beautiful words the truth."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"Knowing others is intelligence; knowing yourself is true wisdom."
+"The best fighter is never angry."
+"Do you have the patience to wait until your mud settles and the water is clear?"
+"To lead people walk behind them."
+"The further one goes, the less one knows."
+"Silence is a source of great strength."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"The truth is not always beautiful, nor beautiful words the truth."
+"He who obtains has little. He who scatters has much."
+"When the best leader's work is done the people say, 'We did it ourselves.'"
+"The more you know yourself, the more you forgive yourself."
+"New beginnings are often disguised as painful endings."
+"The truth is not always beautiful, nor beautiful words the truth."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"The more you know yourself, the more you forgive yourself."
+"If you do not change direction, you may end up where you are heading."
+"At the center of your being you have the answer; you know who you are and you know what you want."
+"He who knows others is wise. He who knows himself is enlightened."
+"To lead people walk behind them."
+"Silence is a source of great strength."
+"The truth is not always beautiful, nor beautiful words the truth."
+"To the mind that is still, the whole universe surrenders."
+"New beginnings are often disguised as painful endings."
+"The further one goes, the less one knows."
+"Silence is a source of great strength."
+"At the center of your being you have the answer; you know who you are and you know what you want."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"Do you have the patience to wait until your mud settles and the water is clear?"
+"He who knows, does not speak. He who speaks, does not know."
+"A journey of a thousand miles begins with a single step."
+"The truth is not always beautiful, nor beautiful words the truth."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"To know yet to think that one does not know is best; Not to know yet to think that one knows will lead to difficulty."
+"He who knows, does not speak. He who speaks, does not know."
+"To the mind that is still, the whole universe surrenders."
+"New beginnings are often disguised as painful endings."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"The truth is not always beautiful, nor beautiful words the truth."
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"Care about what other people think and you will always be their prisoner."
+"Silence is a source of great strength."
+"To lead people walk behind them."
+"A journey of a thousand miles begins with a single step."
+"Do you have the patience to wait until your mud settles and the water is clear?"
+"When you are content to be simply yourself and don't compare or compete, everyone will respect you."
+"The best fighter is never angry."
+"The truth is not always beautiful, nor beautiful words the truth."
+"He who acts, destroys; he who grasps, loses."
+"Silence is a source of great strength."
+"To know yet to think that one does not know is best; Not to know yet to think that one knows will lead to difficulty."
+"Be like water making its way through cracks. Do not be assertive, but adjust to the object, and you shall find a way around or through it."
+"A journey of a thousand miles begins with a single step."
+"New beginnings are often disguised as painful endings."
+"The best fighter is never angry."
+"The truth is not always beautiful, nor beautiful words the truth."
+"To the mind that is still, the whole universe surrenders."
+"Do you have the patience to wait until your mud settles and the water is clear?"
+"Silence is a source of great strength."
