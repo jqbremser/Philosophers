@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/03 22:31:56 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:50:52 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <stdbool.h>
-# include <string.h>
 # include <pthread.h>
-# include <limits.h>
 # define FT_LONG_MAX 9223372036854775807L
 
 # define RFORK	"has taken a fork"
@@ -102,5 +100,10 @@ void	*symp_routine(void *ptr);
 int		print_message(const char *message, t_philo *philo);
 void	ostracize(t_monitor *overseer);
 int		hemlocked(t_monitor *overseer);
+/* ************************************************************************** */
+/*									errors									  */
+/* ************************************************************************** */
+int		handle_error(int errno, t_monitor *overseer);
+int		terminate(t_monitor *overseer);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:27:51 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/03 22:31:56 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:41:23 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	monitor(t_monitor *al, int i, int full_filos)
 		pthread_mutex_unlock(&al->philo[i].meal_lock);
 		ostracize(al);
 		pthread_mutex_lock(&al->print_lock);
-		printf("%zu %d %s\n", time, al->philo->id, DIED);
+		printf("%zu %d %s\n", time, al->philo[i].id, DIED);
 		pthread_mutex_unlock(&al->print_lock);
 		return (-1);
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prime_time_dine_time.c                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 13:33:46 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/03 22:31:56 by jbremser         ###   ########.fr       */
+/*   Created: 2024/08/05 14:41:54 by jbremser          #+#    #+#             */
+/*   Updated: 2024/08/05 14:45:23 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	philo_error_handle(t_monitor *overseer)
 	(void)!write(2, "Error init_philo monitor\n", 26);
 }
 
-static int	handle_error(int errno, t_monitor *overseer)
+int	handle_error(int errno, t_monitor *overseer)
 {
 	if (errno == EXIT_ARG_COUNT_ERROR)
 		(void)!write(2, "Invalid amount of Args\n", 24);
@@ -73,7 +73,7 @@ static int	handle_error(int errno, t_monitor *overseer)
 	return (0);
 }
 
-static int	terminate(t_monitor *overseer)
+int	terminate(t_monitor *overseer)
 {
 	int	i;
 
@@ -91,23 +91,5 @@ static int	terminate(t_monitor *overseer)
 	pthread_mutex_destroy(&overseer->print_lock);
 	free(overseer->philo);
 	overseer->philo = NULL;
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	t_monitor	overseer;
-
-	if (argc != 5 && argc != 6)
-		return (handle_error(EXIT_ARG_COUNT_ERROR, &overseer));
-	if (check_args(argv))
-		return (handle_error(EXIT_INVALID_ARGS, &overseer));
-	if (init_monitor(&overseer, argv))
-		return (handle_error(EXIT_MON_ERROR, &overseer));
-	if (init_philo(&overseer, argv))
-		return (handle_error(EXIT_PHILO_ERROR, &overseer));
-	if (init_threads_routine(&overseer))
-		return (handle_error(EXIT_TR_ERROR, &overseer));
-	terminate(&overseer);
 	return (0);
 }

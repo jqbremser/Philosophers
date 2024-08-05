@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   the_help.c                                         :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 13:51:15 by jbremser          #+#    #+#             */
-/*   Updated: 2024/08/03 17:27:53 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:48:47 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ long	ft_atol(char *str)
 		num = (num * 10 + (*str - '0'));
 		str++;
 	}
-	if (*str || num > INT_MAX)
+	if (*str || num > FT_LONG_MAX)
 		return (-1);
 	return (num);
 }
 
-static int	jaakko_jeekkeri(char *argv)
+static int	number_checker(char *argv)
 {
 	long	num;
 	long	temp;
@@ -81,7 +81,7 @@ int	check_args(char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		if (jaakko_jeekkeri(argv[i]))
+		if (number_checker(argv[i]))
 			return (EXIT_INVALID_ARGS);
 		if (argv[5])
 		{

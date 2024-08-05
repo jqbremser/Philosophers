@@ -6,19 +6,20 @@
 #    By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 13:29:28 by jbremser          #+#    #+#              #
-#    Updated: 2024/08/03 18:22:09 by jbremser         ###   ########.fr        #
+#    Updated: 2024/08/05 14:43:57 by jbremser         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	philo
 
 FLAGS 		=	-Wall -Werror -Wextra -g
-FILES		=	prime_time_dine_time.c \
-				the_help.c \
+FILES		=	main.c \
+				helpers.c \
 				init.c \
 				kronos.c \
 				routine.c \
 				threads.c \
+				errors.c \
 				locks.c
 SRCDIR		=	srcs
 OBJDIR		=	objs
