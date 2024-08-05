@@ -6,7 +6,7 @@
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:17:14 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/25 18:23:30 by jbremser         ###   ########.fr       */
+/*   Updated: 2024/08/03 22:31:56 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,95 +22,85 @@
 # include <limits.h>
 # define FT_LONG_MAX 9223372036854775807L
 
-# define RFORK	"has taken a right fork"
-# define LFORK	"has taken a left fork"
+# define RFORK	"has taken a fork"
+# define LFORK	"has taken a fork"
 
 # define EATING		"is eating"
 # define SLEEPING	"is sleeping"
 # define THINKING	"is thinking"
-# define DIED		"has taken hemlock"
+# define DIED		"died"
 
 typedef enum s_error_code
 {
 	EXIT_ARG_COUNT_ERROR = 200,
 	EXIT_INVALID_ARGS = 201,
-	EXIT_INIT_ERROR = 202,
+	EXIT_MON_ERROR = 202,
 	EXIT_MALLOC_FAIL = 203,
 	EXIT_MUTEX_INIT_ERROR = 204,
 	EXIT_THREADS_ERROR = 205,
-	EXIT_PLATO_ERROR = 206
+	EXIT_PHILO_ERROR = 206,
+	EXIT_TR_ERROR = 207
 }	t_error;
 
-typedef struct s_plato
+typedef struct s_philo
 {
-	int					id;
-	struct	s_moniter	*alcibiades;
-	size_t					hemlock_time;
-	int					dinner_bell;
-	int					drunken_stupor;
+	struct s_monitor	*overseer;
+	size_t				*symposium_start;
+	size_t				meal_time;
+	bool				*hemlock_taken;
+	size_t				time_to_die;
+	size_t				time_to_eat;
+	size_t				time_to_sleep;
 	int					feasts;
-	size_t				symposium_start;
-	size_t				current_time;
+	int					id;
 	pthread_t			thread;
 	int					meals_consumed;
-	size_t				meal_time;
-	bool				full;
-	bool				*hemlock_taken;
 	pthread_mutex_t		r_fork;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		meal_lock;
-}	t_plato;
+}	t_philo;
 
-typedef struct s_moniter
+typedef struct s_monitor
 {	
-	int				rsvps;
+	t_philo			*philo;
 	int				full_philos;
+	int				rsvps;
 	bool			hemlock_taken;
+	size_t			symposium_start;
+	pthread_mutex_t	symposium_lock;
 	pthread_mutex_t	hemlock;
 	pthread_mutex_t	print_lock;
-	t_plato			*plato;
-}	t_moniter;
+}	t_monitor;
 
 /* ************************************************************************** */
-/*									philo_toolkit							  */
+/*									the_help								  */
 /* ************************************************************************** */
-long ft_atol(char *str);
-void print_structs(t_plato *plato);
-int check_args(char **argv);
-
-
+int		check_args(char **argv);
+long	ft_atol(char *str);
+void	unlock_forks(t_philo *philo);
 /* ************************************************************************** */
 /*									init									  */
 /* ************************************************************************** */
-int init_moniter(t_moniter *alcibiades, char **argv);
-int init_plato(t_moniter *alcibiades, char **argv);
-
-
+int		init_monitor(t_monitor *overseer, char **argv);
+int		init_philo(t_monitor *overseer, char **argv);
 /* ************************************************************************** */
 /*									kronos									  */
 /* ************************************************************************** */
-size_t kronosophize(void);
-size_t update_krono(size_t start_time);
-void ft_usleep(size_t mili);
-
+size_t	update_time(void);
+void	ft_usleep(size_t mili, t_monitor *overseer);
 /* ************************************************************************** */
-/*									mutex									  */
+/*									threads									  */
 /* ************************************************************************** */
-int destroy_fork_mutexes(t_plato* plato);
-int clean_data(t_moniter *data);
-int	init_mutexes(t_plato *plato);
-void cleanup(t_plato *plato, t_moniter *data);
-
+int		init_threads_routine(t_monitor *overseer);
 /* ************************************************************************** */
 /*									routine									  */
 /* ************************************************************************** */
-void *symp_routine(void *ptr);
-void *death_routine(void *ptr);
-
+void	*symp_routine(void *ptr);
 /* ************************************************************************** */
 /*									locks									  */
 /* ************************************************************************** */
-int print_message(const char *message, t_plato *plato);
-int is_alive(t_plato *plato);
+int		print_message(const char *message, t_philo *philo);
+void	ostracize(t_monitor *overseer);
+int		hemlocked(t_monitor *overseer);
 
 #endif

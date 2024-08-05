@@ -5,39 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 17:49:32 by jbremser          #+#    #+#             */
-/*   Updated: 2024/07/25 16:19:08 by jbremser         ###   ########.fr       */
+/*   Created: 2024/08/01 16:48:58 by jbremser          #+#    #+#             */
+/*   Updated: 2024/08/03 22:31:56 by jbremser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../symposium.h"
 
-
-int is_alive(t_plato *plato)
+int	print_message(const char *message, t_philo *philo)
 {
-	int alive;
+	unsigned int	time;
 
-	pthread_mutex_lock(&plato->alcibiades->hemlock);
-	if (*plato->hemlock_taken == true)
-		alive = 0;
-	else
-		alive = 1;
-	pthread_mutex_unlock(&plato->alcibiades->hemlock);
-	return (alive);
-}
-			
-int print_message(const char *message, t_plato *plato)
-{
-	unsigned int time;
-
-	pthread_mutex_lock(&plato->alcibiades->hemlock);
-	if (plato->alcibiades->hemlock_taken == true)
+	pthread_mutex_lock(&philo->overseer->print_lock);
+	if (hemlocked(philo->overseer))
+	{
+		pthread_mutex_unlock(&philo->overseer->print_lock);
 		return (1);
-	pthread_mutex_unlock(&plato->alcibiades->hemlock);
-	time = kronosophize() - (plato->symposium_start);
-	pthread_mutex_lock(&plato->alcibiades->print_lock);
-	printf("%u %d %s\n", time, plato->id, message);
-	pthread_mutex_unlock(&plato->alcibiades->print_lock);
+	}
+	time = (update_time() - philo->overseer->symposium_start);
+	printf("%u %d %s\n", time, philo->id, message);
+	pthread_mutex_unlock(&philo->overseer->print_lock);
 	return (0);
 }
 
+void	ostracize(t_monitor *overseer)
+{
+	pthread_mutex_lock(&overseer->hemlock);
+	overseer->hemlock_taken = true;
+	pthread_mutex_unlock(&overseer->hemlock);
+}
+
+int	hemlocked(t_monitor *overseer)
+{
+	pthread_mutex_lock(&overseer->hemlock);
+	if (overseer->hemlock_taken)
+	{
+		pthread_mutex_unlock(&overseer->hemlock);
+		return (1);
+	}
+	pthread_mutex_unlock(&overseer->hemlock);
+	return (0);
+}

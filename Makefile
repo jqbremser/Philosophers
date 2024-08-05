@@ -6,19 +6,19 @@
 #    By: jbremser <jbremser@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 13:29:28 by jbremser          #+#    #+#              #
-#    Updated: 2024/07/23 18:09:42 by jbremser         ###   ########.fr        #
+#    Updated: 2024/08/03 18:22:09 by jbremser         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		=	philosophize
+NAME 		=	philo
 
 FLAGS 		=	-Wall -Werror -Wextra -g
 FILES		=	prime_time_dine_time.c \
-				philo_toolkit.c \
-				mutex.c \
+				the_help.c \
 				init.c \
 				kronos.c \
 				routine.c \
+				threads.c \
 				locks.c
 SRCDIR		=	srcs
 OBJDIR		=	objs
